@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ro" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ZenithFit – Cont</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <a class="logo" href="index.html">ZENITHFIT</a>
+      <nav class="nav">
+        <a href="index.html">Acasă</a>
+        <a href="produse.html">Produse</a>
+        <a href="despre.html">Despre noi</a>
+        <a href="contact.html">Contact</a>
+        <a href="cont.html" class="active">Cont</a>
+      </nav>
+     <button id="theme-toggle" class="icon-btn" aria-label="Comută tema">🌙</button>
+      <button class="burger" id="burger" aria-label="Meniu">☰</button>
+    </div>
+  </header>
+
+  <!-- ACCOUNT -->
+  <section class="container section">
+    <h1 class="section__title">Contul meu</h1>
+
+    <div id="auth-wrapper" class="products" style="grid-template-columns:1fr 1fr">
+      <!-- LOGIN -->
+      <form id="login-form" class="product" style="gap:12px">
+        <div class="product__title">Autentificare</div>
+        <input id="login-email" type="email" placeholder="Email" required style="padding:12px;border-radius:12px;border:1px solid var(--border);background:rgba(0,0,0,.08);color:var(--text)">
+        <input id="login-pass" type="password" placeholder="Parolă" required style="padding:12px;border-radius:12px;border:1px solid var(--border);background:rgba(0,0,0,.08);color:var(--text)">
+        <button class="btn">Intră</button>
+      </form>
+
+      <!-- REGISTER -->
+      <form id="register-form" class="product" style="gap:12px">
+        <div class="product__title">Înregistrare</div>
+        <input id="reg-name" type="text" placeholder="Nume complet" required style="padding:12px;border-radius:12px;border:1px solid var(--border);background:rgba(0,0,0,.08);color:var(--text)">
+        <input id="reg-email" type="email" placeholder="Email" required style="padding:12px;border-radius:12px;border:1px solid var(--border);background:rgba(0,0,0,.08);color:var(--text)">
+        <input id="reg-pass" type="password" minlength="6" placeholder="Parolă (min. 6)" required style="padding:12px;border-radius:12px;border:1px solid var(--border);background:rgba(0,0,0,.08);color:var(--text)">
+        <button class="btn">Creează cont</button>
+      </form>
+    </div>
+
+    <!-- AFTER LOGIN -->
+    <div id="auth-status" class="product" style="display:none; gap:12px">
+      <h3 class="product__title">Bine ai venit!</h3>
+      <p id="auth-user" class="lead"></p>
+      <button id="logout" class="btn" type="button">Ieșire</button>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <nav class="footer__links">
+        <a href="index.html">Acasă</a><a href="produse.html">Produse</a>
+        <a href="despre.html">Despre noi</a><a href="contact.html">Contact</a><a href="cont.html">Cont</a>
+      </nav>
+      <small>© <span id="year"></span> ZenithFit</small>
+    </div>
+  </footer>
+
+  <!-- JS (toggle + burger + mini-auth localStorage) -->
+  <script>
+    (function(){
+      // Theme & nav
+      const root=document.documentElement, btn=document.getElementById("theme-toggle");
+      const burger=document.getElementById("burger"), nav=document.querySelector(".nav");
+      root.setAttribute("data-theme", localStorage.getItem("theme")||"light");
+      const setI=()=>btn.textContent=(root.getAttribute("data-theme")==="dark")?"☀️":"🌙";
+      setI(); btn.onclick=()=>{const n=root.getAttribute("data-theme")==="dark"?"light":"dark"; root.setAttribute("data-theme",n); localStorage.setItem("theme",n); setI();}
+      burger.onclick=()=>nav.classList.toggle("nav--open");
+      document.getElementById("year").textContent=new Date().getFullYear();
+
+      // Auth demo
+      const LS_USERS="zf_users", LS_CUR="zf_current_user";
+      const $=s=>document.querySelector(s);
+      const users=()=>{try{return JSON.parse(localStorage.getItem(LS_USERS))||[]}catch{return[]}};
+      const save=l=>localStorage.setItem(LS_USERS,JSON.stringify(l));
+      const cur=()=>{try{return JSON.parse(localStorage.getItem(LS_CUR))}catch{return null}};
+      const setCur=u=>localStorage.setItem(LS_CUR,JSON.stringify(u));
+
+      function ui(){
+        const u=cur(), wrap=$("#auth-wrapper"), box=$("#auth-status"), who=$("#auth-user");
+        if(u){ wrap.style.display="none"; box.style.display="block"; who.textContent=Ești autentificat ca ${u.name} (${u.email}).; }
+        else { wrap.style.display="grid"; box.style.display="none"; }
+      }
+
+      $("#register-form").addEventListener("submit",e=>{
+        e.preventDefault();
+        const name=$("#reg-name").value.trim();
+        const email=$("#reg-email").value.trim().toLowerCase();
+        const pass=$("#reg-pass").value;
+        const list=users();
+        if(list.some(u=>u.email===email)){ alert("Email deja folosit."); return; }
+        const hashed=btoa(unescape(encodeURIComponent(pass))); // demo
+        list.push({name,email,pass:hashed}); save(list);
+        setCur({name,email}); alert("Cont creat (demo)."); ui();
+      });
+
+      $("#login-form").addEventListener("submit",e=>{
+        e.preventDefault();
+        const email=$("#login-email").value.trim().toLowerCase();
+        const pass=$("#login-pass").value;
+        const hashed=btoa(unescape(encodeURIComponent(pass)));
+        const u=users().find(u=>u.email===email && u.pass===hashed);
+        if(!u){ alert("Credențiale incorecte."); return; }
+        setCur({name:u.name,email:u.email}); alert("Autentificat (demo)."); ui();
+      });
+
+      $("#logout").addEventListener("click",()=>{ localStorage.removeItem(LS_CUR); ui(); });
+      ui();
+    })();
+  </script>
+</body>
+</html>

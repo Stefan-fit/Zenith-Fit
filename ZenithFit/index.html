@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ro" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ZenithFit – Acasă</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header__inner">
+      <a class="logo" href="index.html">ZENITHFIT</a>
+
+      <nav class="nav">
+        <a href="index.html" class="active">Acasă</a>
+        <a href="produse.html">Produse</a>
+        <a href="despre.html">Despre noi</a>
+        <a href="contact.html">Contact</a>
+        <a href="cont.html">Cont</a>
+      </nav>
+
+      <button id="theme-toggle" class="icon-btn" type="button" aria-label="Comută tema">🌙</button>
+      <button class="burger" id="burger" aria-label="Meniu">☰</button>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero__grid">
+      <div class="hero__text">
+        <p class="eyebrow">„Atinge excelența”</p>
+        <h1>Echipament sportiv pentru progres zilnic.</h1>
+        <p class="lead">Simplu, durabil și gata de antrenament.</p>
+        <div class="hero__actions">
+          <a class="btn" href="produse.html">Cumpără acum</a>
+          <a class="btn btn--ghost" href="despre.html">Află mai mult</a>
+        </div>
+      </div>
+
+      <div class="hero__image">
+        <img src="images/logo.png" alt="Echipament ZenithFit">
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORII SCURTĂTURI -->
+  <section class="container section">
+    <h2 class="section__title">Categorii populare</h2>
+    <div class="tiles">
+      <a class="tile" href="produse.html#handbal">
+        <div class="tile__text">Handbal</div>
+        <img src="images/handbal.png" alt="Handbal">
+      </a>
+      <a class="tile" href="produse.html#volei">
+        <div class="tile__text">Volei</div>
+        <img src="images/volei.png" alt="Volei">
+      </a>
+    </div>
+  </section>
+
+  <!-- PRODUSE FEATURED -->
+  <section class="container section">
+    <div class="section__head">
+      <h2 class="section__title">Produse populare</h2>
+      <a class="link" href="produse.html">Vezi toate</a>
+    </div>
+
+    <div class="products">
+      <article class="product">
+        <div class="product__media">
+          <img src="images/ganetere-removebg-preview.png" alt="Gantere 2×5 kg">
+        </div>
+        <h3 class="product__title">Gantere 2×5 kg</h3>
+        <div class="product__price">129,99 RON</div>
+        <button class="btn btn--block">Adaugă în coș</button>
+      </article>
+
+      <article class="product">
+        <div class="product__media">
+          <img src="images/bandaa-removebg-preview.png" alt="Bandă elastică M">
+        </div>
+        <h3 class="product__title">Bandă elastică M</h3>
+        <div class="product__price">39,99 RON</div>
+        <button class="btn btn--block">Adaugă în coș</button>
+      </article>
+
+      <article class="product">
+        <div class="product__media">
+          <img src="images/proteina2.webp" alt="Proteină Whey 1 kg">
+        </div>
+        <h3 class="product__title">Proteină Whey 1 kg</h3>
+        <div class="product__price">149,99 RON</div>
+        <button class="btn btn--block">Adaugă în coș</button>
+      </article>
+
+      <article class="product">
+        <div class="product__media">
+          <img src="images/saltea.png" alt="Saltea fitness 10mm">
+        </div>
+        <h3 class="product__title">Saltea fitness 10 mm</h3>
+        <div class="product__price">99,99 RON</div>
+        <button class="btn btn--block">Adaugă în coș</button>
+      </article>
+    </div>
+  </section>
+
+  <!-- BANNER POVESTE -->
+  <section class="story">
+    <div class="container story__inner">
+      <div class="story__text">
+        <h2>Creat pentru mișcare.</h2>
+        <p>Fiecare produs ZenithFit este selectat pentru confort, rezistență și stil. Fără zgomot, fără trucuri — doar ce te ajută să-ți depășești limitele.</p>
+        <a class="btn btn--ghost" href="despre.html">Despre ZenithFit</a>
+      </div>
+      <div class="story__media">
+        <img src="images/om%20de%20alearga.png" alt="Antrenament">
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <nav class="footer__links">
+        <a href="index.html">Acasă</a>
+        <a href="produse.html">Produse</a>
+        <a href="despre.html">Despre noi</a>
+        <a href="contact.html">Contact</a>
+        <a href="cont.html">Cont</a>
+      </nav>
+      <small>© <span id="year"></span> ZenithFit</small>
+    </div>
+  </footer>
+
+  <!-- Toggle + meniu mobil + anul -->
+  <script>
+    (function(){
+      const root=document.documentElement;
+      const btn=document.getElementById("theme-toggle");
+      const burger=document.getElementById("burger");
+      const nav=document.querySelector(".nav");
+      const saved=localStorage.getItem("theme");
+      root.setAttribute("data-theme", saved?saved:"light");
+      const setIcon=()=>btn.textContent=(root.getAttribute("data-theme")==="dark")?"☀️":"🌙";
+      setIcon();
+      btn.addEventListener("click",()=>{
+        const next=root.getAttribute("data-theme")==="dark"?"light":"dark";
+        root.setAttribute("data-theme",next);
+        localStorage.setItem("theme",next);
+        setIcon();
+      });
+      burger.addEventListener("click",()=>nav.classList.toggle("nav--open"));
+      document.getElementById("year").textContent=new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
