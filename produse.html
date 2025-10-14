@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ro" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ZenithFit – Produse</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header__inner">
+      <a class="logo" href="index.html">ZENITHFIT</a>
+      <nav class="nav">
+        <a href="index.html">Acasă</a>
+        <a href="produse.html" class="active">Produse</a>
+        <a href="despre.html">Despre noi</a>
+        <a href="contact.html">Contact</a>
+        <a href="cont.html">Cont</a>
+      </nav>
+      <button id="theme-toggle" class="icon-btn" aria-label="Comută tema">🌙</button>
+      <button class="burger" id="burger" aria-label="Meniu">☰</button>
+    </div>
+  </header>
+
+  <!-- HERO CATEGORII -->
+  <section class="hero">
+    <div class="container hero__grid">
+      <div class="hero__text">
+        <p class="eyebrow">Shop</p>
+        <h1>Găsește echipamentul potrivit.</h1>
+        <p class="lead">Gantere, benzi, suplimente și accesorii — selectate pentru progres constant.</p>
+      </div>
+      <div class="hero__image"><img src="img/products-hero.jpg" alt="Produse ZenithFit"></div>
+    </div>
+  </section>
+
+  <!-- SCURTĂTURI CATEGORII -->
+  <section class="container section" id="categorii">
+    <h2 class="section__title">Categorii</h2>
+    <div class="tiles">
+      <a class="tile" href="#handbal"><div class="tile__text">Handbal</div><img src="img/cat-handbal.jpg" alt=""></a>
+      <a class="tile" href="#volei"><div class="tile__text">Volei</div><img src="img/cat-volei.jpg" alt=""></a>
+      <a class="tile" href="#paintball"><div class="tile__text">Paintball</div><img src="img/cat-paintball.jpg" alt=""></a>
+      <a class="tile" href="#pescuit"><div class="tile__text">Pescuit</div><img src="img/cat-pescuit.jpg" alt=""></a>
+      <a class="tile" href="#fitness"><div class="tile__text">Fitness</div><img src="img/cat-fitness.jpg" alt=""></a>
+    </div>
+  </section>
+
+  <!-- GRID PRODUSE -->
+  <section class="container section" id="toate">
+    <div class="section__head">
+      <h2 class="section__title">Toate produsele</h2>
+      <a class="link" href="#categorii">înapoi la categorii</a>
+    </div>
+
+    <h3 id="handbal" style="margin:12px 0">Handbal</h3>
+    <div class="products">
+      <article class="product"><div class="product_media"><img src="img/handbal1.jpg" alt=""></div><h3 class="producttitle">Minge Handbal</h3><div class="product_price">120 RON</div><button class="btn btn--block">Adaugă</button></article>
+      <article class="product"><div class="product_media"><img src="img/handbal2.jpg" alt=""></div><h3 class="producttitle">Echipament Handbal</h3><div class="product_price">250 RON</div><button class="btn btn--block">Adaugă</button></article>
+    </div>
+
+    <h3 id="volei" style="margin:22px 0 12px">Volei</h3>
+    <div class="products">
+      <article class="product"><div class="product_media"><img src="img/volei1.jpg" alt=""></div><h3 class="producttitle">Minge Volei</h3><div class="product_price">100 RON</div><button class="btn btn--block">Adaugă</button></article>
+      <article class="product"><div class="product_media"><img src="img/volei2.jpg" alt=""></div><h3 class="producttitle">Plasă Volei</h3><div class="product_price">300 RON</div><button class="btn btn--block">Adaugă</button></article>
+    </div>
+
+    <h3 id="paintball" style="margin:22px 0 12px">Paintball</h3>
+    <div class="products">
+      <article class="product"><div class="product_media"><img src="img/paintball1.jpg" alt=""></div><h3 class="producttitle">Marker Paintball</h3><div class="product_price">700 RON</div><button class="btn btn--block">Adaugă</button></article>
+      <article class="product"><div class="product_media"><img src="img/paintball2.jpg" alt=""></div><h3 class="producttitle">Mască Protecție</h3><div class="product_price">200 RON</div><button class="btn btn--block">Adaugă</button></article>
+    </div>
+
+    <h3 id="pescuit" style="margin:22px 0 12px">Pescuit</h3>
+    <div class="products">
+      <article class="product"><div class="product_media"><img src="img/pescuit1.jpg" alt=""></div><h3 class="producttitle">Lansetă 2.1m</h3><div class="product_price">350 RON</div><button class="btn btn--block">Adaugă</button></article>
+      <article class="product"><div class="product_media"><img src="img/pescuit2.jpg" alt=""></div><h3 class="producttitle">Cutie Momeli</h3><div class="product_price">80 RON</div><button class="btn btn--block">Adaugă</button></article>
+    </div>
+
+    <h3 id="fitness" style="margin:22px 0 12px">Fitness</h3>
+    <div class="products">
+      <article class="product"><div class="product_media"><img src="img/fitness1.jpg" alt=""></div><h3 class="producttitle">Gantere 2×5 kg</h3><div class="product_price">129 RON</div><button class="btn btn--block">Adaugă</button></article>
+      <article class="product"><div class="product_media"><img src="img/fitness2.jpg" alt=""></div><h3 class="producttitle">Bandă elastică M</h3><div class="product_price">40 RON</div><button class="btn btn--block">Adaugă</button></article>
+      <article class="product"><div class="product_media"><img src="img/fitness3.jpg" alt=""></div><h3 class="producttitle">Saltea Fitness 10mm</h3><div class="product_price">99 RON</div><button class="btn btn--block">Adaugă</button></article>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <nav class="footer__links">
+        <a href="index.html">Acasă</a><a href="produse.html">Produse</a>
+        <a href="despre.html">Despre noi</a><a href="contact.html">Contact</a><a href="cont.html">Cont</a>
+      </nav>
+      <small>© <span id="year"></span> ZenithFit</small>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    (function(){
+      const root=document.documentElement, btn=document.getElementById("theme-toggle");
+      const burger=document.getElementById("burger"), nav=document.querySelector(".nav");
+      root.setAttribute("data-theme", localStorage.getItem("theme")||"light");
+      const setI=()=>btn.textContent=(root.getAttribute("data-theme")==="dark")?"☀️":"🌙";
+      setI(); btn.onclick=()=>{const n=root.getAttribute("data-theme")==="dark"?"light":"dark"; root.setAttribute("data-theme",n); localStorage.setItem("theme",n); setI();}
+      burger.onclick=()=>nav.classList.toggle("nav--open");
+      document.getElementById("year").textContent=new Date().getFullYear();
+    })();
+  </script>
+</body>
+</html>
