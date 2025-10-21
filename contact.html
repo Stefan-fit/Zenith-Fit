@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ro" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ZenithFit – Contact</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <a class="logo" href="index.html">
+  <span>FE ZENITHFIT</span>
+  <small class="logo-sub">- UZ DIDACTIC</small>
+</a>
+
+      <nav class="nav">
+        <a href="index.html">Acasă</a>
+        <a href="produse.html">Produse</a>
+        <a href="despre.html">Despre noi</a>
+        <a href="contact.html" class="active">Contact</a>
+        <a href="cont.html">Cont</a>
+      </nav>
+
+      <div class="header-actions" style="display:flex;align-items:center;gap:10px;">
+        <a href="cart.html" id="cart-link" class="icon-btn" aria-label="Vezi coș">🛒 <span id="cart-count">0</span></a>
+        <button id="theme-toggle" class="icon-btn" aria-label="Comută tema">🌙</button>
+        <button class="burger" id="burger" aria-label="Meniu mobil">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTACT -->
+  <section class="container section">
+    <h1 class="section__title">Hai să vorbim</h1>
+    <div class="products" style="grid-template-columns:1fr 1fr">
+      <form class="product" onsubmit="event.preventDefault(); alert('Mulțumim! Te contactăm în curând.')" style="gap:12px">
+        <div class="product__title">Trimite un mesaj</div>
+        <input type="text" placeholder="Nume" required style="padding:12px;border-radius:12px;border:1px solid var(--border);background:rgba(0,0,0,.04);color:var(--text)">
+        <input type="email" placeholder="Email" required style="padding:12px;border-radius:12px;border:1px solid var(--border);background:rgba(0,0,0,.04);color:var(--text)">
+        <textarea rows="6" placeholder="Mesaj" required style="padding:12px;border-radius:12px;border:1px solid var(--border);background:rgba(0,0,0,.04);color:var(--text)"></textarea>
+        <button class="btn">Trimite</button>
+      </form>
+
+      <div class="product" style="gap:10px">
+        <div class="product__title">Date de contact</div>
+        <p class="lead">Email: zenithfit@yahoo.com</p>
+        <p class="lead">Telefon: 0236 446 248</p>
+        <p class="lead">Program: L–V 09:00–18:00</p>
+        <div class="product__media" style="height:260px"><img src="images/contact.png" alt="Contact"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <nav class="footer__links">
+        <a href="index.html">Acasă</a><a href="produse.html">Produse</a><a href="despre.html">Despre noi</a><a href="contact.html">Contact</a><a href="cont.html">Cont</a>
+      </nav>
+      <small>© <span id="year"></span> ZenithFit</small>
+    </div>
+  </footer>
+
+  <!-- SCRIPT: tema, burger, badge coș, anul -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const CART_KEY = "zf_cart_v1";
+      const root = document.documentElement;
+      const btn = document.getElementById("theme-toggle");
+      const burger = document.getElementById("burger");
+      const nav = document.querySelector(".nav");
+      const yearEl = document.getElementById("year");
+      const cartCountEl = document.getElementById("cart-count");
+
+      // tema initiala (default light)
+      const savedTheme = localStorage.getItem("theme") || "light";
+      root.setAttribute("data-theme", savedTheme);
+
+      function updateIcon() { if (!btn) return; btn.textContent = root.getAttribute("data-theme") === "dark" ? "☀️" : "🌙"; }
+      updateIcon();
+
+      if (btn) {
+        btn.addEventListener("click", function () {
+          const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+          root.setAttribute("data-theme", next);
+          localStorage.setItem("theme", next);
+          updateIcon();
+        });
+      }
+
+      if (burger && nav) {
+        burger.addEventListener("click", function () {
+          nav.classList.toggle("nav--open");
+        });
+      }
+
+      if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+      function updateCartBadge() {
+        if (!cartCountEl) return;
+        try {
+          const cart = JSON.parse(localStorage.getItem(CART_KEY)) || {};
+          const total = Object.values(cart).reduce((s, it) => s + (it.qty || 0), 0);
+          cartCountEl.textContent = total;
+        } catch {
+          cartCountEl.textContent = 0;
+        }
+      }
+      updateCartBadge();
+      window.addEventListener("storage", function (e) { if (e.key === CART_KEY) updateCartBadge(); });
+    });
+  </script>
+</body>
+</html>
